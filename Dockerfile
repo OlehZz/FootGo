@@ -1,8 +1,10 @@
-FROM maven:3.6.1-jdk-11-slim AS builder
-COPY . /src/
-WORKDIR /src/
-RUN mvn clean package -Dmaven.test.skip=true
+# Create and save war file
+FROM maven:ibmjava-alpine as build
 
-FROM openjdk:8-jre-alpine
-COPY --from=builder /src/target/footgo-0.0.1-SNAPSHOT.jar /
-ENTRYPOINT java -jar footgo-0.0.1-SNAPSHOT.jar
+#create home directory
+RUN mkdir /home/footgo && apk update && apk add git &&\
+ git clone https://github.com/WiseHands/FootGo.git -b 'release/1.0.0' --single-branch /home/footgo && \
+cp /home/footgo/src/main/resources/application.properties.example /home/footgo/src/main/resources/application.properties
+WORKDIR /home/footgo
+RUN mvn -f /home/footgo/pom.xml clean package && mv /home/footgo/target/ROOT.war\
+ /home/footgo/footgov1.war
