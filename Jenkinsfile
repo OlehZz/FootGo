@@ -13,7 +13,8 @@ pipeline {
                 echo 'Copy...'
 		sh label: '', script: 'copy.sh'
 		echo 'Building..'
-		sh "mvn -Dmaven.test.failure.ignore=true clean package"
+		sh sh label: '', script: 'docker build -t foorgo_build .'
+	//	sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
         stage('Test') {

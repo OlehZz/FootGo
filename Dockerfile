@@ -10,7 +10,7 @@ RUN mvn -f /home/footgo/pom.xml clean package && mv /home/footgo/target/ROOT.war
  /home/footgo/footgov1.war
 
 # copy footgo app
-FROM tomcat:alpine AS prod
+FROM openjdk:8-jre-alpine AS prod
 #RUN mkdir /home/footgo
 WORKDIR /root/
 
