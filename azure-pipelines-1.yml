@@ -12,10 +12,10 @@ variables:
   azureSubscription: '2faac943-fd4e-40b8-8f03-bdd64678428f'
 
   # Web app name
-  webAppName: ''
+  webAppName: 'Footgo'
 
   # Environment name
-  environmentName: ''
+  environmentName: 'Stage'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
